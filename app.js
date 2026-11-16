@@ -277,15 +277,42 @@
   }
 
   let lastFocus = null;
-  function openSheet(ids) {
+  // ---------- листание: по порядку календаря, сторис тоже ----------
+  const navList = () => items.filter((i) => i.date);
+  function navTarget(step) {
+    if (!openIds) return null;
+    const list = navList();
+    const idx = openIds.map((id) => list.findIndex((i) => i.id === id)).filter((i) => i >= 0);
+    if (!idx.length) return null;
+    const j = step > 0 ? Math.max(...idx) + 1 : Math.min(...idx) - 1;
+    return list[j] || null;
+  }
+  function updateNav() {
+    const list = navList();
+    const prev = navTarget(-1); const next = navTarget(1);
+    const p = $('.nav-prev'); const n = $('.nav-next');
+    p.disabled = !prev; n.disabled = !next;
+    p.setAttribute('aria-label', prev ? `Предыдущая: ${fmtShort(prev.date)}, ${prev.title}` : 'Это первая публикация');
+    n.setAttribute('aria-label', next ? `Следующая: ${fmtShort(next.date)}, ${next.title}` : 'Это последняя публикация');
+    const pos = list.findIndex((i) => i.id === openIds[0]);
+    $('#nav-count').textContent = pos >= 0 ? `${pos + 1} из ${list.length}` : '';
+  }
+  function navigate(step) {
+    const t = navTarget(step);
+    if (!t) return;
+    openSheet([t.id], true);
+  }
+
+  function openSheet(ids, keepFocus) {
     openIds = ids;
-    lastFocus = document.activeElement;
+    if (!keepFocus) lastFocus = document.activeElement;
     renderSheet(ids);
+    updateNav();
     ids.forEach((id) => prepareFile(items.find((i) => i.id === id)));
     $('#sheet').hidden = false;
     document.body.style.overflow = 'hidden';
     $('.sheet-panel').scrollTop = 0;
-    $('.sheet-close').focus();
+    if (!keepFocus) $('.sheet-close').focus();
   }
   function closeSheet() {
     $('#sheet').hidden = true; openIds = null;
@@ -350,8 +377,9 @@
   }
 
   document.addEventListener('click', async (e) => {
-    const t = e.target.closest('[data-open],[data-toggle],[data-day],[data-close],[data-share],[data-copy],[data-more],.switch button');
+    const t = e.target.closest('[data-open],[data-toggle],[data-day],[data-close],[data-share],[data-copy],[data-more],[data-nav],.switch button');
     if (!t) return;
+    if (t.dataset.nav) { navigate(Number(t.dataset.nav)); return; }
     if (t.dataset.toggle) { e.stopPropagation(); toggle(t.dataset.toggle); return; }
     if (t.dataset.open) { openSheet([t.dataset.open]); return; }
     if (t.dataset.day) { openSheet(items.filter((i) => i.date === t.dataset.day).map((i) => i.id)); return; }
@@ -382,7 +410,28 @@
     }
   }
   window.addEventListener('hashchange', openFromHash);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#sheet').hidden) closeSheet(); });
+  document.addEventListener('keydown', (e) => {
+    if ($('#sheet').hidden) return;
+    if (e.key === 'Escape') closeSheet();
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '')) return;
+      e.preventDefault(); navigate(e.key === 'ArrowLeft' ? -1 : 1);
+    }
+  });
+  // свайп влево/вправо по поп-апу на телефоне
+  let touch = null;
+  const panelEl = $('.sheet-panel');
+  panelEl.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) { touch = null; return; }
+    touch = { x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now() };
+  }, { passive: true });
+  panelEl.addEventListener('touchend', (e) => {
+    if (!touch) return;
+    const dx = e.changedTouches[0].clientX - touch.x; const dy = e.changedTouches[0].clientY - touch.y;
+    const fast = Date.now() - touch.t < 700;
+    touch = null;
+    if (fast && Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) navigate(dx < 0 ? 1 : -1);
+  }, { passive: true });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && shared) refreshStatus(true); });
 
   // ---------- старт ----------

@@ -40,6 +40,15 @@
     </button>
     <div id="sheet-body"></div>
   </div>
+  <nav class="sheet-nav" aria-label="Листать публикации">
+    <button type="button" class="nav-btn nav-prev" data-nav="-1" aria-label="Предыдущая публикация">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+    </button>
+    <span class="nav-count" id="nav-count" aria-live="polite"></span>
+    <button type="button" class="nav-btn nav-next" data-nav="1" aria-label="Следующая публикация">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+    </button>
+  </nav>
 </div>
 
 <div class="toast" id="toast" role="status" hidden></div>

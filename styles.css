@@ -231,3 +231,24 @@ h1 { margin: 18px 0 2px; font: 500 44px/1 var(--serif); letter-spacing: .01em; }
   .ph.big { height: auto; width: 100%; }
 }
 .row.story .ph.thumb .ph-brand { display: none; }
+
+/* ---------- стрелки «предыдущая / следующая» ---------- */
+.sheet-nav { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: flex; align-items: center;
+  justify-content: space-between; gap: 12px; padding: 10px var(--side) calc(10px + env(safe-area-inset-bottom));
+  background: var(--bg); border-top: 1px solid var(--gold-line); }
+.nav-btn { width: 48px; height: 48px; display: grid; place-items: center; color: var(--gold);
+  border: 1px solid var(--gold-line); border-radius: 50%; background: var(--bg); }
+.nav-btn svg { width: 20px; height: 20px; }
+.nav-btn:active { background: var(--gold-faint); }
+.nav-btn:disabled { color: var(--faint); border-color: var(--faint); cursor: default; }
+.nav-count { color: var(--muted); font: italic 400 17px/1 var(--serif); }
+.sheet-panel { max-height: calc(92vh - 69px); max-height: calc(92dvh - 69px - env(safe-area-inset-bottom));
+  margin-bottom: calc(69px + env(safe-area-inset-bottom)); }
+@media (min-width: 760px) {
+  .sheet-nav { top: 50%; bottom: auto; left: 50%; right: auto; transform: translateX(-50%); height: 0; padding: 0;
+    width: min(calc(100vw - 24px), 1010px); background: none; border: 0; pointer-events: none; }
+  .nav-btn { position: absolute; top: -28px; width: 56px; height: 56px; pointer-events: auto; }
+  .nav-prev { left: 0; } .nav-next { right: 0; }
+  .nav-count { display: none; }
+  .sheet-panel { max-height: 90vh; margin-bottom: 0; }
+}
