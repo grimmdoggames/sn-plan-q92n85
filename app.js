@@ -35,14 +35,22 @@
     share: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v9M4.5 5L8 1.5 11.5 5M3 8.5v6h10v-6" fill="none" stroke="currentColor"/></svg>',
     copy: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="4.5" y="4.5" width="9" height="10" fill="none" stroke="currentColor"/><path d="M2.5 11.5v-10h8" fill="none" stroke="currentColor"/></svg>',
     down: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v9M4.5 7L8 10.5 11.5 7M2.5 14.5h11" fill="none" stroke="currentColor"/></svg>',
+    carousel: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3.5" width="10" height="10" fill="none" stroke="currentColor"/><path d="M4.5 1.5h10v10" fill="none" stroke="currentColor"/></svg>',
+    due: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M8 4.2V8l2.6 1.8" fill="none" stroke="currentColor"/></svg>',
     chev: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor"/></svg>',
   };
-  const KIND = { reel: ['рилс', 'рилс'], work: ['пост работы', 'работа'], story: ['сторис', 'сторис'] };
+  const KIND = { reel: ['рилс', 'рилс'], work: ['фото работы', 'фото'], carousel: ['карусель', 'карусель'], story: ['сторис', 'сторис'] };
   const kindName = (it, short) => (KIND[it.kind] || KIND.work)[short ? 1 : 0];
   const kindLabel = (it) => `<span class="kind">${ICON[it.kind] || ICON.work}${kindName(it)}</span>`;
   const inFeed = (it) => it.kind !== 'story'; // сторис в ленту не идут и в счётчик не входят
+  // серия из плана: обучающий / располагающий / праздничный («работа» не пишем — это и так видно по типу)
+  const seriesLabel = (it) => (it.series && it.series !== 'работа' ? `<span class="series s-${esc(it.series)}">${esc(it.series)}</span>` : '');
+  // «Утвердить до» — срок Кристины: «текст 18.11 · графика 21.11»; в клетке месяца — только первая дата
+  const isReady = (it) => /^готов/i.test(it.due || '');
+  const dueShort = (it) => { if (!it.due) return ''; if (isReady(it)) return 'готов'; const m = it.due.match(/\d{1,2}\.\d{2}/); return m ? 'до ' + m[0] : ''; };
+  const dueRow = (it) => (it.due ? `<span class="due${isReady(it) ? ' is-ready' : ''}">${ICON.due}${isReady(it) ? 'готов' : 'утвердить: ' + esc(it.due)}</span>` : '');
   // заглушка вместо обложки: заголовок на тёмном фоне
-  const placeholder = (it, cls) => `<span class="ph ${cls || ''}" aria-hidden="true"><span class="ph-brand">SALESTINA NAILS</span>
+  const placeholder = (it, cls) => `<span class="ph ph-${esc(it.kind)} ${cls || ''}" aria-hidden="true"><span class="ph-brand">SALESTINA NAILS</span>
     <span class="ph-title">${esc(it.short || it.title)}</span><span class="ph-note">${it.kind === 'story' ? 'сторис готовится' : 'обложка готовится'}</span></span>`;
 
   function toast(msg) {
@@ -118,7 +126,8 @@
         <span class="row-text">
           <span class="row-date">${when}</span>
           <span class="row-title">${esc(it.title)}</span>
-          <span class="row-meta">${kindLabel(it)}${it.newyear ? `<span class="kind">${ICON.star}новогодний</span>` : ''}</span>
+          <span class="row-meta">${kindLabel(it)}${seriesLabel(it)}${it.newyear ? `<span class="kind">${ICON.star}новогодний</span>` : ''}</span>
+          ${dueRow(it)}
         </span>
       </button>
       <button type="button" class="mark" data-toggle="${esc(it.id)}" aria-pressed="${isDone(it.id)}"
@@ -191,7 +200,8 @@
         const inner = it ? `
           <span class="day-thumb">${it.thumb || it.image ? `<img src="${esc(it.thumb || it.image)}" alt="" loading="lazy">` : placeholder(it, 'mini')}${isDone(it.id) ? `<span class="tick">${ICON.tick}</span>` : ''}</span>
           <span class="t">${kindName(it, true)}${list.length > 1 ? ' +' + (list.length - 1) : ''}</span>
-          <span class="day-title">${esc(it.short || it.title)}</span>` : '';
+          <span class="day-title">${esc(it.short || it.title)}</span>
+          ${dueShort(it) ? `<span class="day-due${isReady(it) ? ' is-ready' : ''}">${esc(dueShort(it))}</span>` : ''}` : '';
         const label = it ? `${fmtLong(iso)}: ${list.map((i) => kindName(i) + ' «' + i.title + '»' + (isDone(i.id) ? ', опубликовано' : '')).join('; ')}` : '';
         cells += it
           ? `<button type="button" class="${cls.join(' ')}" data-day="${iso}" aria-label="${esc(label)}"><span class="n">${day}</span>${ny ? ICON.star : ''}${inner}</button>`
@@ -200,7 +210,9 @@
       html += `<section class="month"><h2>${MONTHS_N[m.getMonth()]} <em>${m.getFullYear()}</em></h2><div class="grid">${cells}</div></section>`;
     }
     html += `<div class="legend"><span>${ICON.reel.replace('<svg', '<svg width="13" height="13" style="color:var(--gold)"')} рилс</span>
-      <span>${ICON.work.replace('<svg', '<svg width="13" height="13" style="color:var(--gold)"')} пост работы</span>
+      <span>${ICON.work.replace('<svg', '<svg width="13" height="13" style="color:var(--gold)"')} фото работы</span>
+      <span>${ICON.carousel.replace('<svg', '<svg width="13" height="13" style="color:var(--gold)"')} карусель</span>
+      <span><b class="day-due">до 18.11</b> утвердить до</span>
       <span>${ICON.story.replace('<svg', '<svg width="13" height="13" style="color:var(--gold)"')} сторис (не в ленте)</span>
       <span><i></i> новогоднее оформление</span></div>`;
     html += readyHtml();
@@ -226,25 +238,17 @@
     const done = isDone(it.id);
     const when = it.date ? `${fmtLong(it.date)}${it.time ? ' · ' + it.time : ''}` : 'Дата не назначена';
     const capText = it.caption ? it.caption : '';
-    let rows;
-    if (it.kind === 'reel') {
-      rows = [['Кратко', c.brief], ['Тема из плана', c.topic], ['Тип', c.type], ['Суть', c.essence], ['Новогодняя подача', c.festive],
-        ['Графика', c.graphics], ['Работы в конце', c.works], ['Ведёт к', c.leadsTo], [c.checkLabel || 'Проверить', c.check],
-        ['Проверить (новогодняя подача)', c.festiveCheck], ['Что снять', c.shoot]];
-    } else if (it.kind === 'story') {
-      rows = [['Что это', c.essence], ['Что снять', c.shoot]];
-    } else {
-      rows = [['Кратко', c.brief], ['После рилса', c.afterReel], ['Что показать', c.show],
-        ['Идея подписи (первая строка)', c.captionIdea], ['Что снять', c.shoot]];
-    }
+    const rows = c.fields || [];
+    const idea = (rows.find(([k]) => /^Идея подписи/.test(k)) || [])[1];
     const cardHtml = rows.filter(([, v]) => v).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
     const notes = [it.imageNote, it.note, it.video].filter(Boolean).map((n) => `<p class="note">${esc(n)}</p>`).join('');
     return `<article class="post" data-id="${esc(it.id)}">
       <figure class="post-figure">${it.image ? `<img src="${esc(it.image)}" alt="Обложка: ${esc(it.title)}">` : placeholder(it, 'big')}</figure>
       <header class="post-head">
         <p class="post-date">${esc(when)}</p>
-        <p style="margin:8px 0 0">${kindLabel(it)}${it.newyear ? ` &nbsp; <span class="kind">${ICON.star}новогодний</span>` : ''}</p>
+        <p class="post-tags">${kindLabel(it)}${seriesLabel(it)}${it.newyear ? `<span class="kind">${ICON.star}новогодний</span>` : ''}</p>
         <h2 class="post-title" id="${openIds && openIds[0] === it.id ? 'sheet-title' : ''}">${esc(it.title)}</h2>
+        ${it.due ? `<p class="post-due${isReady(it) ? ' is-ready' : ''}">${ICON.due}<span>${isReady(it) ? 'Готов — утверждать не нужно' : `<b>Утвердить до:</b> ${esc(it.due)}`}</span></p>` : ''}
       </header>
       <div>
         <button type="button" class="status-btn ${done ? 'is-done' : ''}" data-toggle="${esc(it.id)}" aria-pressed="${done}">
@@ -256,9 +260,9 @@
           <button type="button" class="btn" data-copy="${esc(it.id)}">${ICON.copy}Текст</button>
           ${it.image ? `<a class="btn" href="${esc(it.image)}" download="${esc(fileName(it))}">${ICON.down}Картинка</a>` : '<span class="btn is-off" aria-disabled="true">Нет картинки</span>'}
         </div>
-        <p class="label">${it.kind === 'reel' ? 'Подпись к рилсу' : it.kind === 'story' ? 'Текст сторис' : 'Текст поста'}</p>
+        <p class="label">${it.kind === 'reel' ? 'Подпись к рилсу' : it.kind === 'story' ? 'Текст сторис' : it.kind === 'carousel' ? 'Текст карусели' : 'Текст поста'}</p>
         ${capText ? `<p class="caption">${esc(capText)}</p>` : `<p class="caption pending">${esc(it.captionStatus || 'текст готовится')}</p>`}
-        ${!capText && it.kind === 'work' && c.captionIdea ? `<p class="idea">${esc(c.captionIdea)}</p>` : ''}
+        ${!capText && idea ? `<p class="idea">${esc(idea)}</p>` : ''}
         ${notes}
         ${cardHtml ? `<button type="button" class="more-btn" data-more aria-expanded="false">Подробнее${ICON.chev}</button>
           <dl class="card" hidden>${cardHtml}</dl>` : ''}

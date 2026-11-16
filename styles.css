@@ -222,7 +222,7 @@ h1 { margin: 18px 0 2px; font: 500 44px/1 var(--serif); letter-spacing: .01em; }
 .ph.big .ph-title { font-size: 26px; -webkit-line-clamp: 6; }
 .ph.big .ph-note { font-size: 17px; }
 .row.story .row-title { font-style: italic; }
-.day .ph.mini { border-radius: 50%; aspect-ratio: 1; }
+.day .ph.mini.ph-story { border-radius: 50%; aspect-ratio: 1; }
 .row.story .ph.thumb { border-radius: 50%; aspect-ratio: 1; height: 60px; }
 .btn.is-off { color: var(--muted); border-color: var(--faint); font-size: 11px; cursor: default; }
 @media (min-width: 760px) {
@@ -252,3 +252,24 @@ h1 { margin: 18px 0 2px; font: 500 44px/1 var(--serif); letter-spacing: .01em; }
   .nav-count { display: none; }
   .sheet-panel { max-height: 90vh; margin-bottom: 0; }
 }
+
+/* ---------- v3: серия, срок «утвердить до», карусель ---------- */
+.series { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  padding-left: 12px; border-left: 1px solid var(--faint); }
+.s-праздничный { color: var(--gold); }
+.due { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 11.5px; color: var(--muted); }
+.due svg, .post-due svg { width: 12px; height: 12px; flex: none; color: var(--gold); }
+.due.is-ready { color: var(--gold); }
+.day-due { font-size: 8.5px; line-height: 1.1; color: var(--muted); letter-spacing: .04em; font-weight: 400; }
+.day-due.is-ready { color: var(--gold); }
+.legend .day-due { font-size: 11px; color: var(--text); }
+.post-tags { margin: 8px 0 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.post-due { margin: 12px 0 0; display: flex; gap: 8px; align-items: center; font-size: 13.5px; color: var(--muted);
+  padding: 8px 12px; border: 1px solid var(--gold-line); }
+.post-due b { color: var(--gold); font-weight: 400; }
+.post-due.is-ready { color: var(--gold); }
+.card dd { white-space: pre-line; overflow-wrap: anywhere; }
+/* карусель: заглушка «стопкой», чтобы отличалась от фото работы */
+.ph.ph-carousel { box-shadow: 3px -3px 0 -1px var(--bg), 3px -3px 0 0 var(--gold-line); }
+.ph.mini.ph-carousel { box-shadow: 2px -2px 0 -1px var(--bg), 2px -2px 0 0 var(--gold-line); }
+@media (min-width: 760px) { .day-due { font-size: 10px; } }
