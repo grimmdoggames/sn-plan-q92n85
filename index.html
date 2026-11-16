@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#101010">
+<title>Контент-план Salestina Nails</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <p class="brandline">SALESTINA NAILS <span>•</span> ALMATY</p>
+  <h1>Контент-план</h1>
+  <p class="sub" id="range">ноябрь — декабрь 2026</p>
+  <div class="bar">
+    <p class="progress" id="progress"></p>
+    <nav class="switch" aria-label="Вид">
+      <button type="button" data-view="list">Список</button>
+      <button type="button" data-view="month">Месяц</button>
+    </nav>
+  </div>
+  <p class="sync" id="sync"></p>
+</header>
+
+<main id="main" aria-live="polite">
+  <p class="loading">Загружаю план…</p>
+</main>
+
+<footer class="foot">
+  <p>Рилс — вт 20:00 и сб 12:00 · пост работы — чт 12:30 и пн 12:30 (Алматы)</p>
+  <p id="updated"></p>
+</footer>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <button type="button" class="sheet-close" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+    </button>
+    <div id="sheet-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
