@@ -30,7 +30,7 @@
    "imageNote": null,
    "image": "img/reel-g1.jpg",
    "thumb": "img/reel-g1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-17.11-semechki-r3.png",
+   "coverFile": "salestina-cover-v8-17.11-semechki.png",
    "card": {
     "fields": [
      [
@@ -103,7 +103,7 @@
    "imageNote": null,
    "image": "img/reel-g3.jpg",
    "thumb": "img/reel-g3-thumb.jpg",
-   "coverFile": "salestina-cover-v7-19.11-oldmoney-r6.png",
+   "coverFile": "salestina-cover-v8-19.11-oldmoney.png",
    "card": {
     "fields": [
      [
@@ -181,7 +181,7 @@
    "imageNote": null,
    "image": "img/reel-g2.jpg",
    "thumb": "img/reel-g2-thumb.jpg",
-   "coverFile": "salestina-cover-v7-21.11-french-r2.png",
+   "coverFile": "salestina-cover-v8-21.11-french.png",
    "card": {
     "fields": [
      [
@@ -254,7 +254,7 @@
    "imageNote": null,
    "image": "img/reel-d1.jpg",
    "thumb": "img/reel-d1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-23.11-ko-mne-r2.png",
+   "coverFile": "salestina-cover-v8-23.11-ko-mne.png",
    "card": {
     "fields": [
      [
@@ -355,7 +355,7 @@
    "imageNote": null,
    "image": "img/reel-v1.jpg",
    "thumb": "img/reel-v1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-25.11-kak-prohodit.png",
+   "coverFile": "salestina-cover-v8-25.11-kak-prohodit.png",
    "card": {
     "fields": [
      [
@@ -448,7 +448,7 @@
    "imageNote": null,
    "image": "img/reel-t1.jpg",
    "thumb": "img/reel-t1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-27.11-otsloyki.png",
+   "coverFile": "salestina-cover-v8-27.11-otsloyki.png",
    "card": {
     "fields": [
      [
@@ -562,7 +562,7 @@
    "imageNote": null,
    "image": "img/reel-t19.jpg",
    "thumb": "img/reel-t19-thumb.jpg",
-   "coverFile": "salestina-cover-v7-29.11-perenashivat.png",
+   "coverFile": "salestina-cover-v8-29.11-perenashivat.png",
    "card": {
     "fields": [
      [
@@ -663,7 +663,7 @@
    "imageNote": null,
    "image": "img/reel-d2.jpg",
    "thumb": "img/reel-d2-thumb.jpg",
-   "coverFile": "salestina-cover-v7-01.12-ne-toroplyus.png",
+   "coverFile": "salestina-cover-v8-01.12-ne-toroplyus.png",
    "card": {
     "fields": [
      [
@@ -788,7 +788,7 @@
    "imageNote": null,
    "image": "img/reel-t4.jpg",
    "thumb": "img/reel-t4-thumb.jpg",
-   "coverFile": "salestina-cover-v7-03.12-sterilno.png",
+   "coverFile": "salestina-cover-v8-03.12-sterilno.png",
    "card": {
     "fields": [
      [
@@ -910,7 +910,7 @@
    "imageNote": null,
    "image": "img/reel-t5.jpg",
    "thumb": "img/reel-t5-thumb.jpg",
-   "coverFile": "salestina-cover-v7-05.12-otdirat.png",
+   "coverFile": "salestina-cover-v8-05.12-otdirat.png",
    "card": {
     "fields": [
      [
@@ -1015,7 +1015,7 @@
    "imageNote": null,
    "image": "img/reel-v2.jpg",
    "thumb": "img/reel-v2-thumb.jpg",
-   "coverFile": "salestina-cover-v7-07.12-podgotovka.png",
+   "coverFile": "salestina-cover-v8-07.12-podgotovka.png",
    "card": {
     "fields": [
      [
@@ -1136,7 +1136,7 @@
    "imageNote": null,
    "image": "img/reel-t18.jpg",
    "thumb": "img/reel-t18-thumb.jpg",
-   "coverFile": "salestina-cover-v7-09.12-kombi.png",
+   "coverFile": "salestina-cover-v8-09.12-kombi.png",
    "card": {
     "fields": [
      [
@@ -1266,7 +1266,7 @@
    "imageNote": null,
    "image": "img/reel-ng1.jpg",
    "thumb": "img/reel-ng1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-11.12-prazdniki.png",
+   "coverFile": "salestina-cover-v8-11.12-prazdniki.png",
    "card": {
     "fields": [
      [
@@ -1387,7 +1387,7 @@
    "imageNote": null,
    "image": "img/reel-d3.jpg",
    "thumb": "img/reel-d3-thumb.jpg",
-   "coverFile": "salestina-cover-v7-13.12-nagrady.png",
+   "coverFile": "salestina-cover-v8-13.12-nagrady.png",
    "card": {
     "fields": [
      [
@@ -1484,7 +1484,7 @@
    "imageNote": null,
    "image": "img/reel-t10.jpg",
    "thumb": "img/reel-t10-thumb.jpg",
-   "coverFile": "salestina-cover-v7-15.12-vtirka.png",
+   "coverFile": "salestina-cover-v8-15.12-vtirka.png",
    "card": {
     "fields": [
      [
@@ -1594,7 +1594,7 @@
    "imageNote": null,
    "image": "img/reel-l1.jpg",
    "thumb": "img/reel-l1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-17.12-idei-ng.png",
+   "coverFile": "salestina-cover-v8-17.12-idei-ng.png",
    "card": {
     "fields": [
      [
@@ -1695,7 +1695,7 @@
    "imageNote": null,
    "image": "img/reel-v3.jpg",
    "thumb": "img/reel-v3-thumb.jpg",
-   "coverFile": "salestina-cover-v7-19.12-chay-pled.png",
+   "coverFile": "salestina-cover-v8-19.12-chay-pled.png",
    "card": {
     "fields": [
      [
@@ -1788,7 +1788,7 @@
    "imageNote": null,
    "image": "img/reel-ng2.jpg",
    "thumb": "img/reel-ng2-thumb.jpg",
-   "coverFile": "salestina-cover-v7-21.12-vecher-ng.png",
+   "coverFile": "salestina-cover-v8-21.12-vecher-ng.png",
    "card": {
     "fields": [
      [
@@ -1894,7 +1894,7 @@
    "imageNote": null,
    "image": "img/reel-t11.jpg",
    "thumb": "img/reel-t11-thumb.jpg",
-   "coverFile": "salestina-cover-v7-23.12-kachestvo.png",
+   "coverFile": "salestina-cover-v8-23.12-kachestvo.png",
    "card": {
     "fields": [
      [
@@ -1999,7 +1999,7 @@
    "imageNote": null,
    "image": "img/reel-d4.jpg",
    "thumb": "img/reel-d4-thumb.jpg",
-   "coverFile": "salestina-cover-v7-25.12-ne-bolno.png",
+   "coverFile": "salestina-cover-v8-25.12-ne-bolno.png",
    "card": {
     "fields": [
      [
@@ -2100,7 +2100,7 @@
    "imageNote": null,
    "image": "img/reel-l3.jpg",
    "thumb": "img/reel-l3-thumb.jpg",
-   "coverFile": "salestina-cover-v7-27.12-french-vtirka.png",
+   "coverFile": "salestina-cover-v8-27.12-french-vtirka.png",
    "card": {
     "fields": [
      [
@@ -2209,7 +2209,7 @@
    "imageNote": null,
    "image": "img/reel-l2.jpg",
    "thumb": "img/reel-l2-thumb.jpg",
-   "coverFile": "salestina-cover-v7-29.12-raboty-2026.png",
+   "coverFile": "salestina-cover-v8-29.12-raboty-2026.png",
    "card": {
     "fields": [
      [
@@ -2310,7 +2310,7 @@
    "imageNote": null,
    "image": "img/reel-p1.jpg",
    "thumb": "img/reel-p1-thumb.jpg",
-   "coverFile": "salestina-cover-v7-31.12-s-novym-godom.png",
+   "coverFile": "salestina-cover-v8-31.12-s-novym-godom.png",
    "card": {
     "fields": [
      [
