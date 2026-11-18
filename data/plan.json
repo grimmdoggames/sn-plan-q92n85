@@ -1,6 +1,6 @@
 {
  "title": "Контент-план Salestina Nails",
- "updated": "2026-11-16",
+ "updated": "2026-11-18",
  "source": "target/content-plan-v3.md (+ карточки из content-plan-2026-12.md и edu-content-plan.md)",
  "range": {
   "from": "2026-11-17",
@@ -562,7 +562,7 @@
    "imageNote": null,
    "image": "img/reel-t19.jpg",
    "thumb": "img/reel-t19-thumb.jpg",
-   "coverFile": "salestina-cover-v8-29.11-perenashivat.png",
+   "coverFile": "salestina-cover-v8-29.11-perenashivat-r2.png",
    "card": {
     "fields": [
      [
